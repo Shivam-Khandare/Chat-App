@@ -1,16 +1,4 @@
-import daisyui from 'daisyui'
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [daisyui],
-  daisyui:{
-    themes: [
+export const THEMES = [
       // {
       //   megaqueen: {
       //     "primary": "#f82834",               
@@ -78,6 +66,4 @@ export default {
       "dim",
       "nord",
       "sunset",
-    ],
-  }
-}
+    ]
