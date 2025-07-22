@@ -19,7 +19,7 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className='h-screen pt-20'>
+    <div className='min-h-screen pt-20'>
       <div className='max-w-2xl mx-auto p-4 py-8'>
         <div className='bg-base-300 rounded-xl p-6 space-y-8'>
           <div className='text-center'>
@@ -56,9 +56,9 @@ const ProfilePage = () => {
             </div>
           </div>
 
-          <div className='p-6 bg-base-300 mt-6 rounded-xl'>
+          <div className='p-4 bg-base-300 mt-6 rounded-xl'>
             <h2 className='font-medium text-lg mb-4'>Account Information</h2>
-            <div className='space-y-3 text-sm'>
+            <div className='space-y-1 text-sm'>
               <div className='flex items-center justify-between py-2 border-b border-zinc-700'>
                 <span>Member Since</span>
                 <span>{authUser.createdAt?.split("T")[0]}</span>
