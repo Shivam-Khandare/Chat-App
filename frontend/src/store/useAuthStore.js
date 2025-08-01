@@ -39,6 +39,7 @@ export const useAuthStore = create((set, get)=>({
     },
 
     logout: async () => {
+        if(!window.confirm("Are you sure you want to logout?")) return;
         try {
             await axiosInstance.post("/auth/logout")
             set({authUser: null})
