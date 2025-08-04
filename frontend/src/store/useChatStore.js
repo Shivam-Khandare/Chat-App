@@ -2,6 +2,12 @@ import {create} from "zustand"
 import toast from "react-hot-toast"
 import {axiosInstance} from "../lib/axios.js"
 import { useAuthStore } from "./useAuthStore.js"
+import sound from "../assets/sound.mp3"
+
+function playSound() {
+    const audio = new Audio(sound); 
+    audio.play();
+}
 
 export const useChatStore = create((set, get) => ({
     messages: [],
@@ -50,13 +56,20 @@ export const useChatStore = create((set, get) => ({
 
         const socket = useAuthStore.getState().socket;
 
-        socket.on("newMessage", (newMessage)=>{
-            const isMessageSentFromSelectedUser = newMessage.senderId === selectedUser._id;
-            if(!isMessageSentFromSelectedUser) return;
-            set({
-                messages: [...get().messages, newMessage],
-            });
-        });
+        socket.off("newMessage");
+
+        socket.on("newMessage", (newMessage) => {
+        const { authUser } = useAuthStore.getState();
+
+        const isMessageFromOpenUser = newMessage.senderId === selectedUser._id;
+        if (!isMessageFromOpenUser) return;
+
+        set({ messages: [...get().messages, newMessage] });
+
+        if (newMessage.senderId !== authUser._id) {
+            playSound();
+        }
+        })
     },
 
     unsubscribeFromMessages: ()=> {
